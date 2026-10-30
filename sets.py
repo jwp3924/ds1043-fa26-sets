@@ -44,7 +44,7 @@ def find_needle() -> None:
 # This is exceptionally helpful when computation is costly (either directly or
 # because it requires a slow resource, like a network request) or repetitive.
 
-# An toy example of repetitive computation is a recursive implementation of
+# A toy example of repetitive computation is a recursive implementation of
 # calculating a given Fibonacci number:
 def fib(n: int) -> int:
     "Calculate the n-th member of the Fibonacci Sequence"
@@ -57,7 +57,14 @@ def fib(n: int) -> int:
 # Rewrite this function to use a dictionary to cache repetitive work
 def memo_fib(n: int, memo: dict) -> int:
     "Calculate the n-th member of the Fibonacci Sequence, but save work using a dictionary"
-    return fib(n)
+    if n in memo:
+        return memo[n]
+    if n < 0:
+        raise ValueError("The Fibonacci Sequence is not defined for n < 0")
+    if n < 2:
+        return n
+    memo[n] = memo_fib(n - 1, memo) + memo_fib(n - 2, memo)
+    return memo[n]
 
 # Run an experiment using the debugger to compare the stack usage of the basic
 # recursive version with your version that uses a dictionary. Set a breakpoint on
