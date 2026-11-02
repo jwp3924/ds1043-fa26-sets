@@ -43,8 +43,6 @@ def read_textfile(filename:str) -> list[str]:
                     words.append(letter)
     return words
 
-print(read_textfile('typos.txt'))
-
 def write_textfile(lines: list[str], filename: str) -> None:
     """Write out the corrected text"""
     output = ''
@@ -61,15 +59,14 @@ if __name__ == '__main__':
     # Use abbrevs to correct the text in lines here
     uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     lowercase = 'abcdefghijklmnopqrstuvwxyz'
-    corrected
-    for line in lines:
-        if line.lower() in abbrevs:
-            corrected = abbrevs[line.lower()]
+    for j in range(len(lines)):
+        if lines[j].lower() in abbrevs:
+            corrected = abbrevs[lines[j].lower()]
             finalized = ''
             for i in range(len(corrected)):
-                if i == 0 and line[0] in uppercase:
-                    finalized += line[0]
+                if i == 0 and lines[j][0] in uppercase:
+                    finalized += lines[j][0]
                 else:
                     finalized += corrected[i]
-
+            lines[j] = finalized
     write_textfile(lines, 'corrected.txt')
